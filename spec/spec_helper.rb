@@ -29,7 +29,14 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    Rails.logger.level = Logger::DEBUG
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.

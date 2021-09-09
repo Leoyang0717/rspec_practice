@@ -53,6 +53,7 @@ group :test do
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
+  gem "factory_bot_rails"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
