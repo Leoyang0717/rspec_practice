@@ -21,7 +21,16 @@ Rails.application.configure do
   config.public_file_server.headers = {
     'Cache-Control' => "public, max-age=#{1.hour.to_i}"
   }
-
+  config.logger = begin
+    case ENV['RAILS_TEST_LOGGER']
+    when 'file'
+      Logger.new(Rails.root.join('log', 'test.log'))
+    when 'null'
+      Logger.new(IO::NULL)
+    else
+      Logger.new(STDOUT)
+    end
+  end
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
