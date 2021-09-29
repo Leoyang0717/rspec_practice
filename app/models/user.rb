@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  def change_name(new_name)
-    return false if new_name.blank?
+  has_one :profile
 
-    self.name = new_name
-    save!
+  def change_name(name)
+    self.name = name
+    self.save!
   end
 end
